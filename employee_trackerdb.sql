@@ -32,5 +32,23 @@ SELECT * FROM department;
 SELECT * FROM employee; 
 SELECT * FROM role; 
 
+INSERT into department (name)
+VALUES ("Sales");
+INSERT into department (name)
+VALUES ("Finance");
+INSERT into department (name)
+VALUES ("Engineering");
+INSERT into department (name)
+VALUES ("Legal");
+INSERT into department (name)
+VALUES ("Executive");
 
+INSERT into employee(first_name, last_name, role_id)
+VALUE ();
+INSERT into employee(first_name, last_name, role_id)
+VALUE ();
+INSERT into employee(first_name, last_name, role_id)
+VALUE ();
+INSERT into employee(first_name, last_name, role_id)
+VALUE ();
 
