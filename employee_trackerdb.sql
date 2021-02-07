@@ -15,6 +15,7 @@ id INTEGER AUTO_INCREMENT NOT NULL,
 title VARCHAR(30) NOT NULL,
 salary DECIMAL NOT NULL, 
 department_id INTEGER NOT NULL,
+constraint fk_department_id foreign key (department_id) references department(id),
 PRIMARY KEY(id)
 );
 
@@ -24,7 +25,7 @@ first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL,
 role_id INTEGER NOT NULL,
 manager_id INTEGER NOT NULL,
-
+constraint fk_manager_id FOREIGN KEY (manager_id) REFERENCES employee(id),
 PRIMARY KEY(id)
 );
 
@@ -41,14 +42,29 @@ VALUES ("Engineering");
 INSERT into department (name)
 VALUES ("Legal");
 INSERT into department (name)
-VALUES ("Executive");
+VALUES ("Manager");
+
+
+INSERT into role (title, salary, department_id)
+VALUES ("Sales Lead", 40000, 1);
+INSERT into role (title, salary, department_id)
+VALUES ("Salesperson", 45000, 1);
+INSERT into role (title, salary, department_id)
+VALUES ("Lead Engineer", 73000, 2);
+INSERT into role (title, salary, department_id)
+VALUES ("Accountant", 60000, 3);
+INSERT into role (title, salary, department_id)
+VALUES ("Legal", 70000, 4);
+INSERT into role (title, salary, department_id)
+VALUES ("Manager", 85000, 5);
+
 
 INSERT into employee(first_name, last_name, role_id)
-VALUE ();
+VALUE ("John","Cena", 1);
 INSERT into employee(first_name, last_name, role_id)
-VALUE ();
+VALUE ("John","Rambo",2);
 INSERT into employee(first_name, last_name, role_id)
-VALUE ();
+VALUE ("John","Bon Jovi",3);
 INSERT into employee(first_name, last_name, role_id)
-VALUE ();
+VALUE ("John","",4);
 
