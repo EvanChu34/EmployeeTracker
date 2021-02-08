@@ -1,7 +1,6 @@
 const inquirer = require("inquirer")
 const mysql = require("mysql")
 const cTable = require('console.table');
-const { type } = require("os");
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -165,10 +164,54 @@ function updateEmployee(){
 }
 
 function addRole(){
-
+    connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role", function(err, res) {
+        inquirer.prompt([
+            {
+                name:"Title",
+                type:"input",
+                message:"What is the title of the role?"
+            },
+            {
+                name:"Salary",
+                type:"input",
+                message: "What is the salary?"
+            }
+        ]).then(function(res){
+            connection.query(
+                "INSERT INTO role SET ?",
+                {
+                    title: res.Title,
+                    salary: res.Salary
+                },
+                function(err){
+                    if(err) throw err
+                    console.table(res);
+                    startPrompt();
+                }
+            )
+        })
+    })
 }
 
 function addDepartment(){
-
+    inquirer
+    .prompt([
+        {
+            name:"name",
+            type:"input",
+            message:"What department do you want to add?"
+        }
+    ]).then(function(res){
+        var query = connection.query("INSERT INTO department SET ?",
+        {
+            name:res.name
+        },
+        function(err){
+            if(err) throw err
+            console.table(res);
+            startPrompt()
+        }
+        )
+    })
 }
 
