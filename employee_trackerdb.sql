@@ -33,38 +33,38 @@ SELECT * FROM department;
 SELECT * FROM employee; 
 SELECT * FROM role; 
 
-INSERT into department (name)
+INSERT INTO department (name)
 VALUES ("Sales");
-INSERT into department (name)
+INSERT INTO department (name)
 VALUES ("Finance");
-INSERT into department (name)
+INSERT INTO department (name)
 VALUES ("Engineering");
-INSERT into department (name)
+INSERT INTO department (name)
 VALUES ("Legal");
-INSERT into department (name)
+INSERT INTO department (name)
 VALUES ("Manager");
 
 
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Sales Lead", 40000, 1);
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Salesperson", 45000, 1);
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Lead Engineer", 73000, 2);
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Accountant", 60000, 3);
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Legal", 70000, 4);
-INSERT into role (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ("Manager", 85000, 5);
 
 
-INSERT into employee(first_name, last_name, role_id)
-VALUE ("John","Cena", 1);
-INSERT into employee(first_name, last_name, role_id)
-VALUE ("John","Rambo",2);
-INSERT into employee(first_name, last_name, role_id)
-VALUE ("John","Bon Jovi",3);
-INSERT into employee(first_name, last_name, role_id)
-VALUE ("John","Wrona",4);
+INSERT INTO employee (first_name, last_name, manger_id, role_id)
+VALUE ("John","Cena", null, 1);
+INSERT INTO employee (first_name, last_name, manger_id, role_id)
+VALUE ("John","Rambo", 1, 2);
+INSERT INTO employee (first_name, last_name, manger_id, role_id)
+VALUE ("John","Bon Jovi", null,3);
+INSERT INTO employee (first_name, last_name, manger_id, role_id)
+VALUE ("John","Wrona", 2, 4);
 
