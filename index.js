@@ -13,12 +13,11 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err
     console.log("Connected as Id" + connection.threadId)
-    startPrompt()
+    startPrompt();
 });
 
 function startPrompt(){
-    inquirer
-    .prompt([
+    inquirer.prompt([
         {
             type:"list",
             message: "What would you like to do",
@@ -26,7 +25,7 @@ function startPrompt(){
             choices:[
                 "View All Employees?", 
                 "View All Employee's By Roles?",
-                "View all Emplyees By Deparments", 
+                "View all Employees By Deparments", 
                 "Update Employee",
                 "Add Employee?",
                 "Add Role?",
@@ -38,21 +37,21 @@ function startPrompt(){
             case "View All Employees?":
                 viewAllEmployees();
             break;
-            case "View All Employee's by roles":
+            case "View All Employee's By Roles?":
                 viewAllRoles();
             break;
-            case "View All Employee's by departments":
+            case "View All Employees By Departments":
                 viewAllDepartments();
             break;
-            case "Add Employee":
+            case "Add Employee?":
                 addEmployee();
             case "Update Employee":
                 updateEmployee();
             break;
-            case "Add Role":
+            case "Add Role?":
                 addRole();
             break;
-            case "Add Department":
+            case "Add Department?":
                 addDepartment();
             break;
         }
@@ -93,20 +92,20 @@ function selectRole(){
     connection.query("SELECT * FROM role", function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
-          roleArr.push(res[i].title);
+          roleArray.push(res[i].title);
         }
     })
-    return roleArr;
+    return roleArray;
 }
 
 function selectManager(){
     connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
-          managersArr.push(res[i].first_name);
+          managerArray.push(res[i].first_name);
         }
     })
-    return managersArr;
+    return managerArray;
 }
 
 
@@ -134,11 +133,6 @@ function addEmployee(){
             type: "rawlist",
             message:"Select your manager",
             choices: selectManager()
-        },
-        {
-            name:"",
-            type: "input",
-            message:"",
         }
     ]).then(function (val){
         var roleID = selectRole().indexOf(val.role) +1
@@ -194,9 +188,8 @@ function updateEmployee(){
             if(err) throw err 
             console.table(val)
             startPrompt()
-        }
-    })    
-
+        })
+    })
     })
 }
 
@@ -213,6 +206,7 @@ function addRole(){
                 type:"input",
                 message: "What is the salary?"
             }
+
         ]).then(function(res){
             connection.query(
                 "INSERT INTO role SET ?",
