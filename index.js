@@ -25,7 +25,7 @@ function startPrompt(){
             choices:[
                 "View All Employees?", 
                 "View All Employee's By Roles?",
-                "View all Employees By Deparments", 
+                "View All Employees By Deparments", 
                 "Update Employee",
                 "Add Employee?",
                 "Add Role?",
@@ -45,6 +45,7 @@ function startPrompt(){
             break;
             case "Add Employee?":
                 addEmployee();
+            break;
             case "Update Employee":
                 updateEmployee();
             break;
@@ -139,8 +140,8 @@ function addEmployee(){
         var managerID = selectManager().indexOf(val.choice) +1
         connection.query("INSERT INTO employee SET ?",
         {
-            first_name: val.firstname,
-            last_name: val.lastname,
+            first_name: val.firstName,
+            last_name: val.lastName,
             manager_id: managerID,
             role_id: roleID
         },
