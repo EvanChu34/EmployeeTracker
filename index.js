@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Crossfitchuchu34!",
+    password: "",// add your password here
     database: "employee_trackerdb"
 });
 
@@ -217,7 +217,7 @@ function addDepartment(){
             message:"What department do you want to add?"
         }
     ]).then(function(res){
-        var query = connection.query("INSERT INTO department SET ?",
+        connection.query("INSERT INTO department SET ?",
         {
             name:res.name
         },
