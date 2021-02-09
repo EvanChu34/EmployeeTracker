@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",// add your password here
+    password: "Crossfitchuchu34!",// add your password here
     database: "employee_trackerdb"
 });
 
@@ -179,7 +179,7 @@ function updateEmployee(){
 }
 
 function addRole(){
-    connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role", function(err, res) {
+    connection.query("SELECT role.title AS Title, role.salary AS Salary, role.department_id AS Department FROM role", function(err, res) {
         inquirer.prompt([
             {
                 name:"Title",
@@ -196,7 +196,7 @@ function addRole(){
                 "INSERT INTO role SET ?",
                 {
                     title: res.Title,
-                    salary: res.Salary
+                    salary: res.Salary,
                 },
                 function(err){
                     if(err) throw err
