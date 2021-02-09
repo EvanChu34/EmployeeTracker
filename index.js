@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "Crossfitchuchu34!",
     database: "employee_trackerdb"
 });
 
@@ -24,8 +24,8 @@ function startPrompt(){
             name:"choice",
             choices:[
                 "View All Employees?", 
-                "View All Employee's By Roles?",
-                "View All Employees By Deparments", 
+                "View All Roles?",
+                "View All Deparments", 
                 "Update Employee",
                 "Add Employee?",
                 "Add Role?",
@@ -37,7 +37,7 @@ function startPrompt(){
             case "View All Employees?":
                 viewAllEmployees();
             break;
-            case "View All Employee's By Roles?":
+            case "View All Roles?":
                 viewAllRoles();
             break;
             case "View All Employees By Departments":
@@ -70,7 +70,7 @@ function viewAllEmployees(){
 }
 
 function viewAllRoles(){
-    connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
+    connection.query("SELECT role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
     function(err, res) {
     if (err) throw err
     console.table(res)
@@ -79,7 +79,7 @@ function viewAllRoles(){
 }
 
 function viewAllDepartments(){
-    connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
+    connection.query("SELECT department.name AS Title FROM department ", 
     function(err, res) {
       if (err) throw err
       console.table(res)
@@ -88,7 +88,7 @@ function viewAllDepartments(){
 }
 
 var roleArray = [];
-var managerArray = [];
+
 function selectRole(){
     connection.query("SELECT * FROM role", function(err, res) {
         if (err) throw err
@@ -97,16 +97,6 @@ function selectRole(){
         }
     })
     return roleArray;
-}
-
-function selectManager(){
-    connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
-        if (err) throw err
-        for (var i = 0; i < res.length; i++) {
-          managerArray.push(res[i].first_name);
-        }
-    })
-    return managerArray;
 }
 
 
@@ -125,25 +115,19 @@ function addEmployee(){
         },
         {
             name:"role",
-            type: "list",
+            type: "rawlist",
             message:"What is the role?",
             choices: selectRole()
-        },
-        {
-            name:"choice",
-            type: "rawlist",
-            message:"Select your manager",
-            choices: selectManager()
         }
+
     ]).then(function (val){
-        var roleID = selectRole().indexOf(val.role) +1
-        var managerID = selectManager().indexOf(val.choice) +1
+        var roleId = selectRole().indexOf(val.role) +1
+
         connection.query("INSERT INTO employee SET ?",
         {
-            first_name: val.firstName,
-            last_name: val.lastName,
-            manager_id: managerID,
-            role_id: roleID
+            first_name: val.firstname,
+            last_name: val.lastname,
+            role_id: roleId
         },
             function(err){
                 if(err) throw err
@@ -177,13 +161,13 @@ function updateEmployee(){
             choices:selectRole()
         }
     ]).then(function(val) {
-        var roleID = selectRole().indexOf(val.role) +1
+        var roleId = selectRole().indexOf(val.role) +1
         connection.query("UPDATE employee SET WHERE ?", 
         {
             last_name: val.lastName
         },
         {
-            role_id: roleID
+            role_id: roleId
         },
         function(err){
             if(err) throw err 
@@ -207,7 +191,6 @@ function addRole(){
                 type:"input",
                 message: "What is the salary?"
             }
-
         ]).then(function(res){
             connection.query(
                 "INSERT INTO role SET ?",

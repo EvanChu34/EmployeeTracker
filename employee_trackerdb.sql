@@ -5,9 +5,8 @@ CREATE DATABASE employee_trackerdb;
 USE employee_trackerdb;
 
 CREATE TABLE department(
-id INTEGER NOT NULL AUTO_INCREMENT ,
-name VARCHAR(30) NOT NULL,
-PRIMARY KEY(id)
+id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE role(
@@ -23,9 +22,7 @@ id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL,
 role_id INTEGER NOT NULL,
-manager_id INTEGER NOT NULL,
-FOREIGN KEY (role_id) REFERENCES role(id),
-FOREIGN KEY (manager_id) REFERENCES employee(id)
+FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
 INSERT INTO department (name)
@@ -49,17 +46,17 @@ VALUES ("Accountant", 60000, 2);
 INSERT INTO role (title, salary, department_id)
 VALUES ("Lawyer", 70000, 4);
 INSERT INTO role (title, salary, department_id)
-VALUES ("software Engineer", 73000, 3);
+VALUES ("Software Engineer", 73000, 3);
 
 
-INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("John","Cena", 1, 1);
-INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("John","Rambo", 2, 2);
-INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("John","Bon Jovi", 3, 3);
-INSERT INTO employee (first_name, last_name, manager_id, role_id)
-VALUE ("John","Wick", 4, 4);
+INSERT INTO employee (first_name, last_name,  role_id)
+VALUE ("John","Cena", 1);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUE ("John","Rambo", 2);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUE ("John","Bon Jovi",  3);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUE ("John","Wick",  4);
 
 
 SELECT * FROM department; 
