@@ -20,7 +20,7 @@ view all the employee's, departments and roles of the application.
 
 ## Demo of Application
 
-The demo of the application can be found in the demo folder of the repo. 
+![](demo/EvanChuEmployeeTrackerDemo.gif)
 
 ---------------------------	
 
